@@ -8,20 +8,20 @@ const loader = document.getElementById('loader');
 let apiQuotes = [];
 
 //  Show loading wheel
-function loading () {
+function showLoadingWheel() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 } 
 
 // Hide loading wheel
-function complete (){
+function removeLoadingWheel() {
     loader.hidden = true;
     quoteContainer.hidden = false;
  }
 
 // Show new quote
 function newQuote() {
-    loading();
+    showLoadingWheel();
     // Pick a random quote form apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
@@ -41,7 +41,7 @@ function newQuote() {
 
     // Set quote and hide loader
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingWheel();
 
     // // Get quote locally
     // const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
@@ -50,7 +50,7 @@ function newQuote() {
 
 // Get quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingWheel();
     const apiURL = 'https://type.fit/api/quotes';
     try {
         // async and await will not be populated until data is fetched from API
